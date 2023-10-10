@@ -1,0 +1,39 @@
+$color_1: #fff;
+$border-color_1: #ddd;
+$border-color_2: #111;
+
+.panel-default {
+	>.panel-heading-forum {
+		color: $color_1;
+		background: #F4645F;
+		border-color: $border-color_1;
+	}
+	>.panel-heading-post {
+		color: $color_1;
+		background: #1f648b;
+		border-color: $border-color_1;
+	}
+	>.panel-heading-reply {
+		color: $color_1;
+		background: #2F3133;
+		border-color: $border-color_2;
+	}
+}
+.panel-heading-forum {
+	a {
+		color: $color_1;
+		text-decoration: underline;
+	}
+}
+.panel-heading-post {
+	a {
+		color: $color_1;
+		text-decoration: underline;
+	}
+}
+.panel-heading-reply {
+	a {
+		color: $color_1;
+		text-decoration: underline;
+	}
+}
