@@ -37,9 +37,16 @@
         </div>
         @endforelse
 
-    @if($posts->count())
-        {{ $posts->links() }}
-    @endif
+        @if($posts->count())
+            {{ $posts->links() }}
+        @endif
+
+        @Logged()
+            <h3>Está identificado</h3>
+        @else
+            @include('partials.login_link', ['message' => __("Inicia sesión para crear un post")])
+        @endLogged
+
         </div>
     </div>
 

@@ -28,6 +28,12 @@
             {{ $forums->links() }}
         @endif
 
+        <h2>{{ __("Añadir un nuevo foro") }}</h2>
+
+        <hr/>
+
+        @include('partials.errors')
+
         <form method="POST" action="forums">
             {{ csrf_field() }}
             <div class="form-group">
