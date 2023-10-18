@@ -26,6 +26,19 @@
 	            <div class="panel-body">
 	                {{ $reply->reply }}
 	            </div>
+
+                @if($reply->isAuthor())
+                    <div class="panel-footer">
+                        <form method="POST" action="../replies/{{ $reply->id }}">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            <button type="submit" name="deleteReply" class="btn btn-danger">
+                                {{ __("Eliminar respuesta") }}
+                            </button>
+                        </form>
+                    </div>
+                @endif
+
 	        </div>
 
     	@empty
@@ -39,6 +52,26 @@
 		@if($replies->count())
 			{{ $replies->links() }}
 		@endif
+
+        @Logged()
+            <h3 class="text-muted">{{ __("Añadir una nueva respuesta al post :name", ['name' => $post->name]) }}</h3>
+            @include('partials.errors')
+
+            <form method="POST" action="../replies">
+                {{ csrf_field() }}
+                <input type="hidden" name="post_id" value="{{ $post->id }}" />
+
+                <div class="form-group">
+                    <label for="reply" class="col-md-12 control-label">{{ __("Respuesta") }}</label>
+                    <textarea id="reply" class="form-control" name="reply">{{ old('reply') }}</textarea>
+                </div>
+
+                <button type="submit" name="addReply" class="btn btn-default">{{ __("Añadir respuesta") }}</button>
+            </form>
+        @else
+            @include('partials.login_link', ['message' => __("Inicia sessión para responder")])
+        @endLogged()
+
 
     </div>
 </div>

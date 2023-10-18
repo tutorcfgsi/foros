@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reply;
 use Illuminate\Http\Request;
+use App\Rules\ValidReply;
 
 class ReplyController extends Controller
 {
@@ -28,7 +29,15 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'reply' => ['required', new ValidReply]
+        ]);
+
+        $request->merge(["user_id" => auth()->id()]);
+        Reply::create(request()->input());
+
+	    return back()->with('message', ['success', __('Respuesta añadida correctamente')]);
+
     }
 
     /**
@@ -60,6 +69,7 @@ class ReplyController extends Controller
      */
     public function destroy(Reply $reply)
     {
-        //
+        $reply->delete();
+		return back()->with('message', ['success', __('Respuesta eliminada correctamente')]);
     }
 }

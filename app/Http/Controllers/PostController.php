@@ -65,6 +65,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if( ! $post->isOwner()){
+			abort(401);
+        }
+
+		$post->delete();
+		return back()->with('message', ['success', __('Post y respuestas eliminados correctamente')]);
     }
 }

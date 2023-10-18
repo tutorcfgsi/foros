@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,5 @@ Route::get('/', [App\Http\Controllers\ForumController::class, 'index'])->name('i
 Route::resource('forums', ForumController::class);
 
 Route::resource('posts', PostController::class);
+
+Route::resource('replies', ReplyController::class);
