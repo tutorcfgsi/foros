@@ -30,10 +30,27 @@
                 @if($reply->isAuthor())
                     <div class="panel-footer">
                         <form method="POST" action="../replies/{{ $reply->id }}">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
+                            @csrf
+                            @method('DELETE')
                             <button type="submit" name="deleteReply" class="btn btn-danger">
                                 {{ __("Eliminar respuesta") }}
+                            </button>
+                        </form>
+                    </div>
+                @endif
+
+                @if($reply->isAuthor())
+                    <div class="panel-footer">
+                        <form method="POST" action="../replies/{{ $reply->id }}">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label for="reply" class="col-md-12 control-label">{{ __("Respuesta") }}</label>
+                                <textarea id="reply" class="form-control" name="reply">{{ old('reply') }}</textarea>
+                            </div>
+                            <button type="submit" name="updateReply" class="btn btn-warning">
+                                {{ __("Editar respuesta") }}
                             </button>
                         </form>
                     </div>

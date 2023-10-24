@@ -61,7 +61,12 @@ class ReplyController extends Controller
      */
     public function update(Request $request, Reply $reply)
     {
-        //
+        $this->validate(request(), [
+            'reply' => 'required|unique:replies',
+        ]);
+
+        $reply->update(request()->input());
+        return back()->with('message', ['success', __('Respuesta actualizada correctamente')]);
     }
 
     /**
